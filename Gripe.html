@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Tengo gripe?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgba(224, 251, 244, 0.955);
+        }
+
+        #titulo {
+        text-align: center;
+        font-size: 60px;
+        font-weight: 500;
+        font-style: normal;
+        color: white;
+        margin: 0px;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to right, #040404, #060606);
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+        }
+
+        #form {
+        font-weight: 600;
+        width: 40%;
+        border: 5px solid rgb(74, 237, 246);
+        padding: 10px;
+        background-color: rgba(211, 251, 253, 0.76); 
+        border-radius: 15px;
+        position: absolute; 
+        left: 10%; 
+        top: 20%; 
+        }
+
+        .boton-evaluar {
+        background-color: #06d2c1; 
+        color: white; 
+        font-weight: bold;
+        padding: 10px 20px; 
+        border: none; 
+         border-radius: 5px; 
+        cursor: pointer; 
+        font-size: 18px; 
+    }
+
+        .boton-evaluar:hover {
+         background-color: #114540; 
+    }
+
+
+        .pregunta {
+            margin-bottom: 20px;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            position: absolute; 
+            right: 10%; 
+            top: 20%; 
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="titulo">¿Tengo gripe?</h1>
+    <main>
+    <form class="row mt-4" , id="form">
+        <div class="pregunta">
+            <label>¿Tienes fiebre?</label><br>
+            <input type="radio" name="fiebre" value="sí"> Sí
+            <input type="radio" name="fiebre" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Tienes tos?</label><br>
+            <input type="radio" name="tos" value="sí"> Sí
+            <input type="radio" name="tos" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Te duele la garganta?</label><br>
+            <input type="radio" name="garganta" value="sí"> Sí
+            <input type="radio" name="garganta" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Tienes dolor de cabeza?</label><br>
+            <input type="radio" name="dolor_cabeza" value="sí"> Sí
+            <input type="radio" name="dolor_cabeza" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Tienes congestión nasal?</label><br>
+            <input type="radio" name="congestion" value="sí"> Sí
+            <input type="radio" name="congestion" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Te sientes fatigado/a o cansado/a?</label><br>
+            <input type="radio" name="fatiga" value="sí"> Sí
+            <input type="radio" name="fatiga" value="no"> No
+        </div>
+        <div class="pregunta">
+            <label>¿Has tenido contacto con personas con sintomas similares?</label><br>
+            <input type="radio" name="contacto" value="sí"> Sí
+            <input type="radio" name="contacto" value="no"> No
+        </div>
+        <button type="button" onclick="evaluarRespuestas()" class="boton-evaluar">Evaluar</button>
+    </form>
+
+    <div class="resultado" id="resultado">
+    </div>
+
+    <div><img src="gripe.jpeg" style="width: 300px; height: 300px; position: absolute; 
+        right: 15%; 
+        top: 30%; "></div>
+
+</main>
+    <script>
+        function evaluarRespuestas() {
+            const preguntasImportantes = ['fiebre', 'tos', 'garganta', 'contacto']; 
+            const preguntasSecundarias = ['congestion', 'fatiga'];
+            let conteoSi = 0;
+    
+            preguntasImportantes.forEach(pregunta => {
+                const si = document.querySelector(`input[name="${pregunta}"][value="sí"]:checked`);
+                if(si !== null) {
+                    conteoSi += 2; 
+                }
+            });
+    
+            preguntasSecundarias.forEach(pregunta => {
+                const si = document.querySelector(`input[name="${pregunta}"][value="sí"]:checked`);
+                if(si !== null) {
+                    conteoSi += 1; 
+                }
+            });
+    
+            const resultadoDiv = document.getElementById('resultado');
+            if(conteoSi >= 5) { 
+                resultadoDiv.textContent = "Podrías tener gripe. Considera consultar a un médico.";
+            } else {
+                resultadoDiv.textContent = "Parece que no tienes gripa, pero mantente atento/a a los síntomas.";
+            }
+        }
+    </script>
+    
+
+</body>
+</html>
